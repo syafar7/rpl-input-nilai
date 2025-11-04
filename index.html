@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Input Nilai Mahasiswa</title>
+
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Styling custom -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#">Aplikasi Input Nilai</a>
+      <span class="text-light small">Implementasi: Firebase</span>
+    </div>
+  </nav>
+
+  <main class="container my-4">
+    <div class="row g-4">
+      <!-- Form input -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-header">
+            <strong>Form Input Nilai</strong>
+          </div>
+          <div class="card-body">
+            <form id="nilaiForm" autocomplete="off">
+              <div class="mb-3">
+                <label for="nim" class="form-label">NIM</label>
+                <input type="text" id="nim" class="form-control" placeholder="Contoh: 2204411001" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="nama" class="form-label">Nama</label>
+                <input type="text" id="nama" class="form-control" placeholder="Nama mahasiswa" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="mata_kuliah" class="form-label">Mata Kuliah</label>
+                <input type="text" id="mata_kuliah" class="form-control" placeholder="Contoh: Pemrograman Web" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="nilai" class="form-label">Nilai</label>
+                <input type="number" id="nilai" class="form-control" min="0" max="100" placeholder="0 - 100" required>
+              </div>
+
+              <div id="formMsg" class="mb-2"></div>
+
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary" id="btnSave">Simpan Nilai</button>
+                <button type="button" id="btnClear" class="btn btn-outline-secondary">Bersihkan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="mt-3 text-muted small">
+          Note: Setelah Simpan, data akan muncul otomatis pada tabel di sebelah kanan (Firestore realtime).
+        </div>
+      </div>
+
+      <!-- Tabel data -->
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <strong>Daftar Nilai Mahasiswa</strong>
+            <div>
+              <input id="searchInput" placeholder="Cari NIM / Nama / Mata Kuliah" class="form-control form-control-sm" style="width:260px;display:inline-block">
+            </div>
+          </div>
+
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-striped mb-0" id="tableNilai">
+                <thead class="table-light">
+                  <tr>
+                    <th>NIM</th>
+                    <th>Nama</th>
+                    <th>Mata Kuliah</th>
+                    <th class="text-end">Nilai</th>
+                    <th class="text-nowrap">Tanggal Input</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyNilai">
+                  <!-- rows injected by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-footer text-muted d-flex justify-content-between">
+            <div id="recordsCount">0 record</div>
+            <div>
+              <button id="btnExport" class="btn btn-sm btn-outline-primary">Export CSV</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 small text-muted">
+          Instruksi: isi form, klik "Simpan Nilai". Jika ingin melihat perubahan realtime — jangan refresh.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-3 text-center text-muted">
+    dibuat untuk tugas RPL — by@ Kelompok 5
+  </footer>
+
+  <!-- Firebase config (module) -->
+  <script type="module" src="./logic.js"></script>
+</body>
+</html>
